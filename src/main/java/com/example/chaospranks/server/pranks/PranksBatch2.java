@@ -85,8 +85,8 @@ public class PranksBatch2 {
 
         PrankManager.getInstance().broadcastMessage("§c§l[!] ВЗРЫВНЫЕ МЫШИ: Стая камикадзе пикирует на вас (12 сек)!");
 
-        for (int tick = 1; tick <= 240; tick++) {
-            PrankManager.getInstance().scheduleTask("ExplosiveBats_Tick_" + tick, tick, () -> {
+        for (int tick = 1; tick <= 240; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("ExplosiveBats_Tick_" + currentTick, currentTick, () -> {
                 Iterator<Bat> it = bats.iterator();
                 while (it.hasNext()) {
                     Bat bat = it.next();
@@ -168,8 +168,8 @@ public class PranksBatch2 {
     public static void executePrank23_LightAllergy(List<ServerPlayer> players) {
         PrankManager.getInstance().broadcastMessage("§6§l[!] АЛЛЕРГИЯ НА СВЕТ: Прячьтесь в тень! На солнце вы горите 25 секунд!");
 
-        for (int tick = 1; tick <= 500; tick++) {
-            PrankManager.getInstance().scheduleTask("LightAllergy_Tick_" + tick, tick, () -> {
+        for (int tick = 1; tick <= 500; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("LightAllergy_Tick_" + currentTick, currentTick, () -> {
                 for (ServerPlayer player : players) {
                     ServerLevel level = player.serverLevel();
                     if (player.isAlive() && level.isDay() && level.canSeeSky(player.blockPosition())) {
@@ -336,14 +336,14 @@ public class PranksBatch2 {
 
         PrankManager.getInstance().broadcastMessage("§0§l[!] ЧЕРНАЯ ДЫРА: Гравитационная аномалия затягивает всё вокруг (6 сек)!");
 
-        for (int tick = 1; tick <= 120; tick++) {
+        for (int tick = 1; tick <= 120; tick++) { final int currentTick = tick;
             final int currentTick = tick;
             PrankManager.getInstance().scheduleTask("BlackHole_Tick_" + currentTick, currentTick, () -> {
                 // Визуальная сфера черной дыры
                 level.sendParticles(ParticleTypes.SQUID_INK, singularity.x, singularity.y, singularity.z, 25, 0.5, 0.5, 0.5, 0.05);
                 level.sendParticles(ParticleTypes.PORTAL, singularity.x, singularity.y, singularity.z, 30, 2.0, 2.0, 2.0, 0.1);
 
-               if (currentTick % 25 == 0) {
+               if (currentcurrentTick % 25 == 0) {
                     level.playSound(null, singularity.x, singularity.y, singularity.z, SoundEvents.BEACON_DEACTIVATE, SoundSource.BLOCKS, 2.0f, 0.5f);
                 }
 
@@ -386,8 +386,8 @@ public class PranksBatch2 {
         PrankManager.getInstance().broadcastMessage("§c§l[!] ОРБИТАЛЬНЫЙ УДАР! Красный прицел зафиксирован на вас! Бегите (3 сек)!");
 
         // 3 секунды отрисовки красного круга на земле
-        for (int tick = 1; tick <= 60; tick++) {
-            PrankManager.getInstance().scheduleTask("OrbitalAim_Tick_" + tick, tick, () -> {
+        for (int tick = 1; tick <= 60; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("OrbitalAim_Tick_" + currentTick, currentTick, () -> {
                 for (Map.Entry<ServerPlayer, Vec3> entry : strikeTargets.entrySet()) {
                     Vec3 pos = entry.getValue();
                     ServerLevel level = entry.getKey().serverLevel();
@@ -443,10 +443,10 @@ public class PranksBatch2 {
         PrankManager.getInstance().broadcastMessage("§4§l[!] БОСС-ВЕРТОЛЕТ: В воздухе завис визер и ведет огонь (10 сек)!");
 
         // Имитация звука вертолетных лопастей
-        for (int tick = 1; tick <= 200; tick++) {
+        for (int tick = 1; tick <= 200; tick++) { final int currentTick = tick;
             final int currentTick = tick;
             PrankManager.getInstance().scheduleTask("HeliSound_Tick_" + currentTick, currentTick, () -> {
-                if (wither.isAlive() && currentTick % 8 == 0) {
+                if (wither.isAlive() && currentcurrentTick % 8 == 0) {
                     level.playSound(null, wither.getX(), wither.getY(), wither.getZ(), SoundEvents.MINECART_RIDING, SoundSource.HOSTILE, 2.5f, 1.8f);
                     level.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, wither.getX(), wither.getY() + 1.0, wither.getZ(), 8, 0.4, 0.2, 0.4, 0.05);
                 }
@@ -548,8 +548,8 @@ public class PranksBatch2 {
         }
 
         // Механика наступания: каждый шаг Гулливера наносит 4 урона лилипутам под ногами
-        for (int tick = 1; tick <= 600; tick++) {
-            PrankManager.getInstance().scheduleTask("Stomp_Tick_" + tick, tick, () -> {
+        for (int tick = 1; tick <= 600; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("Stomp_Tick_" + currentTick, currentTick, () -> {
                 if (gulliver.isAlive()) {
                     for (ServerPlayer lilliput : players) {
                         if (lilliput.getId() != gulliver.getId() && lilliput.isAlive() && lilliput.level() == gulliver.level()) {
@@ -718,9 +718,9 @@ public class PranksBatch2 {
 
         PrankManager.getInstance().broadcastMessage("§d§l[!] СВАДЕБНЫЙ ВАЛЬС: §f" + p1.getScoreboardName() + " §dи §f" + p2.getScoreboardName() + " §dкружатся в танце любви!");
 
-        for (int tick = 1; tick <= 200; tick++) {
+        for (int tick = 1; tick <= 200; tick++) { final int currentTick = tick;
             final int t = tick;
-            PrankManager.getInstance().scheduleTask("Waltz_Tick_" + tick, tick, () -> {
+            PrankManager.getInstance().scheduleTask("Waltz_Tick_" + currentTick, currentTick, () -> {
                 if (p1.isAlive() && p2.isAlive()) {
                     double angle = t * 0.45;
                     double radius = 1.1;
@@ -821,8 +821,8 @@ public class PranksBatch2 {
         PrankManager.getInstance().broadcastMessage("§2§l[!] БЛОХИ И НОСИТЕЛИ: Игроки разбиты по парам! Блохи сидят на шее и дергают управление носителей (25 сек)!");
 
         // Тик-обработчик синхронизации и укусов Дикой Блохи
-        for (int tick = 1; tick <= 500; tick++) {
-            PrankManager.getInstance().scheduleTask("Fleas_Tick_" + tick, tick, () -> {
+        for (int tick = 1; tick <= 500; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("Fleas_Tick_" + currentTick, currentTick, () -> {
                 if (hasWildFlea) {
                     ServerPlayer wild = pool.get(pool.size() - 1);
                     if (wild.isAlive()) {

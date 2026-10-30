@@ -94,9 +94,9 @@ public class PranksBatch5 {
 
         PrankManager.getInstance().broadcastMessage("§e§l[!] ТАНДЕМ-ДРАНДУЛЕТ: Все сидят в связке! Держите темп (20 сек)!");
 
-        for (int tick = 1; tick <= 400; tick++) {
+        for (int tick = 1; tick <= 400; tick++) { final int currentTick = tick;
             final int t = tick;
-            PrankManager.getInstance().scheduleTask("Tandem_Tick_" + tick, tick, () -> {
+            PrankManager.getInstance().scheduleTask("Tandem_Tick_" + currentTick, currentTick, () -> {
                 Vec3 forward = leader.getLookAngle().scale(0.5);
                 for (Minecart c : train) {
                     if (c.isAlive()) {
@@ -198,8 +198,8 @@ public class PranksBatch5 {
         level.playSound(null, victim.getX(), victim.getY(), victim.getZ(), SoundEvents.UI_BUTTON_CLICK.get(), SoundSource.PLAYERS, 2.0f, 1.0f);
         PrankManager.getInstance().broadcastMessage("§f§l[!] WINDOWS CURSOR: Курсор мыши схватил §e" + victim.getScoreboardName() + " §f(Drag & Drop) на 10 сек!");
 
-        for (int tick = 1; tick <= 200; tick++) {
-            PrankManager.getInstance().scheduleTask("Cursor_Tick_" + tick, tick, () -> {
+        for (int tick = 1; tick <= 200; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("Cursor_Tick_" + currentTick, currentTick, () -> {
                 if (cursor.isAlive() && victim.isAlive()) {
                     Vec3 drag = new Vec3(0.3, 0.1, 0.3);
                     cursor.moveTo(cursor.getX() + drag.x, cursor.getY() + drag.y, cursor.getZ() + drag.z);
@@ -230,9 +230,9 @@ public class PranksBatch5 {
         level.playSound(null, engine.getX(), engine.getY(), engine.getZ(), SoundEvents.RAID_HORN.get(), SoundSource.PLAYERS, 3.0f, 0.5f);
         PrankManager.getInstance().broadcastMessage("§9§l[!] ПАРОВОЗИК ТОМАС: §e" + engine.getScoreboardName() + "§9 несется напролом под гудок локомотива (15 сек)!");
 
-        for (int tick = 1; tick <= 300; tick++) {
+        for (int tick = 1; tick <= 300; tick++) { final int currentTick = tick;
             final int t = tick;
-            PrankManager.getInstance().scheduleTask("Thomas_Tick_" + tick, tick, () -> {
+            PrankManager.getInstance().scheduleTask("Thomas_Tick_" + currentTick, currentTick, () -> {
                 if (engine.isAlive()) {
                     level.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, engine.getX(), engine.getY() + 1.8, engine.getZ(), 8, 0.2, 0.4, 0.2, 0.05);
 
@@ -309,8 +309,8 @@ public class PranksBatch5 {
 
         PrankManager.getInstance().broadcastMessage("§c§l[!] КАПТЧА НА ВЫЖИВАНИЕ: Подтвердите, что вы не робот, пока бежите вперед!");
 
-        for (int tick = 1; tick <= 200; tick++) {
-            PrankManager.getInstance().scheduleTask("Captcha_Run_Tick_" + tick, tick, () -> {
+        for (int tick = 1; tick <= 200; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("Captcha_Run_Tick_" + currentTick, currentTick, () -> {
                 for (ServerPlayer p : players) {
                     Vec3 look = p.getLookAngle();
                     p.setDeltaMovement(look.x * 0.45, p.getDeltaMovement().y, look.z * 0.45);
@@ -387,8 +387,8 @@ public class PranksBatch5 {
             level.playSound(null, shrek.getX(), shrek.getY(), shrek.getZ(), SoundEvents.RAID_HORN.get(), SoundSource.HOSTILE, 3.0f, 0.7f);
             PrankManager.getInstance().broadcastMessage("§2§l[!] БОЛОТО ШРЕКА: 'ЧТО ВЫ ЗАБЫЛИ НА МОЕМ БОЛОТЕ?!' (15 сек)!");
 
-            for (int tick = 1; tick <= 300; tick++) {
-                PrankManager.getInstance().scheduleTask("Shrek_Tick_" + tick, tick, () -> {
+            for (int tick = 1; tick <= 300; tick++) { final int currentTick = tick;
+                PrankManager.getInstance().scheduleTask("Shrek_Tick_" + currentTick, currentTick, () -> {
                     if (shrek.isAlive()) {
                         for (ServerPlayer p : players) {
                             if (p.distanceTo(shrek) < 3.0) {
@@ -428,9 +428,9 @@ public class PranksBatch5 {
 
         PrankManager.getInstance().broadcastMessage("§9§l[!] СТИРАЛЬНАЯ МАШИНА: Режим отжима 1000 оборотов/мин активирован (8 сек)!");
 
-        for (int tick = 1; tick <= 160; tick++) {
+        for (int tick = 1; tick <= 160; tick++) { final int currentTick = tick;
             final int t = tick;
-            PrankManager.getInstance().scheduleTask("Washing_Tick_" + tick, tick, () -> {
+            PrankManager.getInstance().scheduleTask("Washing_Tick_" + currentTick, currentTick, () -> {
                 for (ServerPlayer p : players) {
                     double angle = t * 0.8;
                     p.setDeltaMovement(Math.cos(angle) * 0.6, 0.1, Math.sin(angle) * 0.6);
@@ -456,9 +456,9 @@ public class PranksBatch5 {
 
         PrankManager.getInstance().broadcastMessage("§e§l[!] ГИГАНТСКИЙ ПЫЛЕСОС: Затягивает всех на высоту! Прячьтесь под крышу (12 сек)!");
 
-        for (int tick = 1; tick <= 240; tick++) {
+        for (int tick = 1; tick <= 240; tick++) { final int currentTick = tick;
             final int t = tick;
-            PrankManager.getInstance().scheduleTask("Vacuum_Tick_" + tick, tick, () -> {
+            PrankManager.getInstance().scheduleTask("Vacuum_Tick_" + currentTick, currentTick, () -> {
                 level.sendParticles(ParticleTypes.POOF, intake.x, intake.y, intake.z, 20, 1.5, 0.2, 1.5, 0.05);
 
                 if (t % 20 == 0) {
@@ -557,8 +557,8 @@ public class PranksBatch5 {
         level.playSound(null, target.getX(), target.getY(), target.getZ(), SoundEvents.ANVIL_LAND, SoundSource.HOSTILE, 2.5f, 0.5f);
         PrankManager.getInstance().broadcastMessage("§6§l[!] ИНДИАНА ДЖОНС: Огромный валун катится за вами! Бегите без оглядки (15 сек)!");
 
-        for (int tick = 1; tick <= 300; tick++) {
-            PrankManager.getInstance().scheduleTask("Boulder_Tick_" + tick, tick, () -> {
+        for (int tick = 1; tick <= 300; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("Boulder_Tick_" + currentTick, currentTick, () -> {
                 if (boulder.isAlive()) {
                     Vec3 toTarget = target.position().subtract(boulder.position()).normalize().scale(0.6);
                     boulder.setDeltaMovement(toTarget.x, boulder.getDeltaMovement().y, toTarget.z);
@@ -603,9 +603,9 @@ public class PranksBatch5 {
     public static void executePrank95_LaserGrid(List<ServerPlayer> players) {
         PrankManager.getInstance().broadcastMessage("§c§l[!] ЛАЗЕРНАЯ СЕТКА: Лучи на высоте ног и шеи! Прыгайте и приседайте (15 сек)!");
 
-        for (int tick = 1; tick <= 300; tick++) {
+        for (int tick = 1; tick <= 300; tick++) { final int currentTick = tick;
             final int t = tick;
-            PrankManager.getInstance().scheduleTask("Laser_Tick_" + tick, tick, () -> {
+            PrankManager.getInstance().scheduleTask("Laser_Tick_" + currentTick, currentTick, () -> {
                 for (ServerPlayer p : players) {
                     ServerLevel level = p.serverLevel();
                     boolean laserAtFeet = (t / 40) % 2 == 0;
@@ -638,8 +638,8 @@ public class PranksBatch5 {
     public static void executePrank96_SurgeonHandSpasm(List<ServerPlayer> players) {
         PrankManager.getInstance().broadcastMessage("§6§l[!] СПАЗМ РУКИ: Рука не слушается и непроизвольно машет каждые полсекунды (20 сек)!");
 
-        for (int tick = 1; tick <= 400; tick++) {
-            PrankManager.getInstance().scheduleTask("Spasm_Tick_" + tick, tick, () -> {
+        for (int tick = 1; tick <= 400; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("Spasm_Tick_" + currentTick, currentTick, () -> {
                 for (ServerPlayer p : players) {
                     if (p.tickCount % 10 == 0) {
                         p.swing(InteractionHand.MAIN_HAND, true);
@@ -665,9 +665,9 @@ public class PranksBatch5 {
 
         PrankManager.getInstance().broadcastMessage("§e§l[!] ПАКМАН: §f" + pacman.getScoreboardName() + " §eстал Пакманом (waka-waka) и глотает друзей (15 сек)!");
 
-        for (int tick = 1; tick <= 300; tick++) {
+        for (int tick = 1; tick <= 300; tick++) { final int currentTick = tick;
             final int t = tick;
-            PrankManager.getInstance().scheduleTask("Pacman_Tick_" + tick, tick, () -> {
+            PrankManager.getInstance().scheduleTask("Pacman_Tick_" + currentTick, currentTick, () -> {
                 if (pacman.isAlive()) {
                     if (t % 10 == 0) {
                         pacman.playNotifySound(SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 1.5f, 1.2f);
@@ -761,9 +761,9 @@ public class PranksBatch5 {
 
         PrankManager.getInstance().broadcastMessage("§a§l[!] НЛО: Инопланетный зеленый луч похищает §e" + target.getScoreboardName() + " §aи корову (12 сек)!");
 
-        for (int tick = 1; tick <= 240; tick++) {
+        for (int tick = 1; tick <= 240; tick++) { final int currentTick = tick;
             final int t = tick;
-            PrankManager.getInstance().scheduleTask("Ufo_Tick_" + tick, tick, () -> {
+            PrankManager.getInstance().scheduleTask("Ufo_Tick_" + currentTick, currentTick, () -> {
                 // Зеленый световой столб
                 for (double y = 0; y <= 15; y += 1.5) {
                     level.sendParticles(ParticleTypes.HAPPY_VILLAGER, target.getX(), target.getY() + y, target.getZ(), 4, 0.5, 0.2, 0.5, 0.02);

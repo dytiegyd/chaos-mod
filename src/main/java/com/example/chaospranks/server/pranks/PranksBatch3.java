@@ -94,8 +94,8 @@ public class PranksBatch3 {
 
         PrankManager.getInstance().broadcastMessage("§e§l[!] NEXTBOT: Пачка чипсов бежит за вами со звуком мема (15 сек)!");
 
-        for (int tick = 1; tick <= 300; tick++) {
-            PrankManager.getInstance().scheduleTask("Nextbot_Tick_" + tick, tick, () -> {
+        for (int tick = 1; tick <= 300; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("Nextbot_Tick_" + currentTick, currentTick, () -> {
                 if (nextbot.isAlive()) {
                     // Траектория наведения на игрока
                     Vec3 toTarget = target.position().subtract(nextbot.position()).normalize().scale(0.85);
@@ -145,8 +145,8 @@ public class PranksBatch3 {
 
         PrankManager.getInstance().broadcastMessage("§c§l[!] КУРИЦА-ГОДЗИЛЛА: Огромная курица несется на вас и откладывает ТНТ (20 сек)!");
 
-        for (int tick = 1; tick <= 400; tick++) {
-            PrankManager.getInstance().scheduleTask("Godzilla_Tick_" + tick, tick, () -> {
+        for (int tick = 1; tick <= 400; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("Godzilla_Tick_" + currentTick, currentTick, () -> {
                 if (godzilla.isAlive()) {
                     if (godzilla.tickCount % 20 == 0) {
                         level.playSound(null, godzilla.getX(), godzilla.getY(), godzilla.getZ(), SoundEvents.CHICKEN_HURT, SoundSource.HOSTILE, 3.0f, 0.35f);
@@ -192,8 +192,8 @@ public class PranksBatch3 {
 
         PrankManager.getInstance().broadcastMessage("§2§l[!] КРИПЕР-ГИГАЧАД: Он не взрывается... он идет делать вам суплекс!");
 
-        for (int tick = 1; tick <= 300; tick++) {
-            PrankManager.getInstance().scheduleTask("Gigachad_Tick_" + tick, tick, () -> {
+        for (int tick = 1; tick <= 300; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("Gigachad_Tick_" + currentTick, currentTick, () -> {
                 if (gigachad.isAlive() && victim.isAlive()) {
                     if (gigachad.distanceTo(victim) < 2.0) {
                         // Суплекс: подброс и удар об землю
@@ -235,8 +235,8 @@ public class PranksBatch3 {
 
         PrankManager.getInstance().broadcastMessage("§7§l[!] БАНДА ГОПНИКОВ-ЖИТЕЛЕЙ: 'Эй, изумруды есть? А если найдем?' (15 сек)!");
 
-        for (int tick = 1; tick <= 300; tick++) {
-            PrankManager.getInstance().scheduleTask("Gopnik_Tick_" + tick, tick, () -> {
+        for (int tick = 1; tick <= 300; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("Gopnik_Tick_" + currentTick, currentTick, () -> {
                 for (Villager v : gopniks) {
                     if (v.isAlive()) {
                         Vec3 toPlayer = target.position().subtract(v.position()).normalize().scale(0.4);
@@ -312,9 +312,9 @@ public class PranksBatch3 {
 
         PrankManager.getInstance().broadcastMessage("§6§l[!] СУНДУК-МИМИК прыгнул на голову §f" + victim.getScoreboardName() + "§6! Друзья, сбейте его ударом!");
 
-        for (int tick = 1; tick <= 300; tick++) {
-            PrankManager.getInstance().scheduleTask("Mimic_Bite_" + tick, tick, () -> {
-                if (victim.isAlive() && tick % 25 == 0) {
+        for (int tick = 1; tick <= 300; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("Mimic_Bite_" + currentTick, currentTick, () -> {
+                if (victim.isAlive() && currentTick % 25 == 0) {
                     victim.hurt(victim.damageSources().generic(), 1.0f);
                     victim.playNotifySound(SoundEvents.CHEST_CLOSE, SoundSource.BLOCKS, 1.5f, 1.4f);
                 }
@@ -339,9 +339,9 @@ public class PranksBatch3 {
 
         PrankManager.getInstance().broadcastMessage("§f§l[!] КОРОВА-ВЕРТОЛЕТ: В небе крутится корова и сбрасывает бомбы из молока (15 сек)!");
 
-        for (int tick = 1; tick <= 300; tick++) {
+        for (int tick = 1; tick <= 300; tick++) { final int currentTick = tick;
             final int t = tick;
-            PrankManager.getInstance().scheduleTask("HeliCow_Tick_" + tick, tick, () -> {
+            PrankManager.getInstance().scheduleTask("HeliCow_Tick_" + currentTick, currentTick, () -> {
                 if (cow.isAlive()) {
                     cow.setYRot(cow.getYRot() + 25.0f); // Бешеное вращение
 
@@ -489,8 +489,8 @@ public class PranksBatch3 {
     public static void executePrank52_TrampolineBlocks(List<ServerPlayer> players) {
         PrankManager.getInstance().broadcastMessage("§a§l[!] БЛОКИ-БАТУТЫ: Все поверхности стали супер-батутами на 20 секунд!");
 
-        for (int tick = 1; tick <= 400; tick++) {
-            PrankManager.getInstance().scheduleTask("Trampoline_Tick_" + tick, tick, () -> {
+        for (int tick = 1; tick <= 400; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("Trampoline_Tick_" + currentTick, currentTick, () -> {
                 for (ServerPlayer player : players) {
                     if (player.onGround()) {
                         Vec3 m = player.getDeltaMovement();
@@ -520,8 +520,8 @@ public class PranksBatch3 {
 
         PrankManager.getInstance().broadcastMessage("§4§l[!] ПРЕДМЕТЫ-ПРЕДАТЕЛИ: Лежащий лут ожил и атакует игроков (15 сек)!");
 
-        for (int tick = 1; tick <= 300; tick++) {
-            PrankManager.getInstance().scheduleTask("Traitor_Tick_" + tick, tick, () -> {
+        for (int tick = 1; tick <= 300; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("Traitor_Tick_" + currentTick, currentTick, () -> {
                 for (ItemEntity item : traitors) {
                     if (item.isAlive()) {
                         Vec3 toPlayer = target.position().subtract(item.position()).normalize().scale(0.35);
@@ -597,8 +597,8 @@ public class PranksBatch3 {
     public static void executePrank55_ClownSteps(List<ServerPlayer> players) {
         PrankManager.getInstance().broadcastMessage("§e§l[!] КЛОУНСКИЕ ШАГИ: Каждый ваш шаг пищит как резиновый утенок на 50 блоков (30 сек)!");
 
-        for (int tick = 1; tick <= 600; tick++) {
-            PrankManager.getInstance().scheduleTask("ClownSteps_Tick_" + tick, tick, () -> {
+        for (int tick = 1; tick <= 600; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("ClownSteps_Tick_" + currentTick, currentTick, () -> {
                 for (ServerPlayer player : players) {
                     if (player.walkDist - player.walkDistO > 0.05) {
                         if (player.tickCount % 5 == 0) {
@@ -728,9 +728,9 @@ public class PranksBatch3 {
 
         PrankManager.getInstance().broadcastMessage("§9§l[!] ДПС: 'Водитель, примите вправо и заглушите двигатель!' Погоня 18 секунд!");
 
-        for (int tick = 1; tick <= 360; tick++) {
+        for (int tick = 1; tick <= 360; tick++) { final int currentTick = tick;
             final int t = tick;
-            PrankManager.getInstance().scheduleTask("Police_Tick_" + tick, tick, () -> {
+            PrankManager.getInstance().scheduleTask("Police_Tick_" + currentTick, currentTick, () -> {
                 for (IronGolem g : police) {
                     if (g.isAlive()) {
                         // Красно-синяя мигалка

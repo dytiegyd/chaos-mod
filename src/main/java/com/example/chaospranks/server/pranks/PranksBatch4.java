@@ -164,9 +164,9 @@ public class PranksBatch4 {
 
         PrankManager.getInstance().broadcastMessage("§4§l[!] ОДЕРЖИМОСТЬ: " + possessed.getScoreboardName() + " одержим! Голова вывернута, всех тянет к нему!");
 
-        for (int tick = 1; tick <= 300; tick++) {
+        for (int tick = 1; tick <= 300; tick++) { final int currentTick = tick;
             final int t = tick;
-            PrankManager.getInstance().scheduleTask("Exorcist_Tick_" + tick, tick, () -> {
+            PrankManager.getInstance().scheduleTask("Exorcist_Tick_" + currentTick, currentTick, () -> {
                 if (possessed.isAlive()) {
                     if (t % 25 == 0) {
                         possessed.playNotifySound(SoundEvents.PORTAL_AMBIENT, SoundSource.PLAYERS, 1.5f, 0.5f);
@@ -279,9 +279,9 @@ public class PranksBatch4 {
             level.playSound(null, spider.getX(), spider.getY(), spider.getZ(), SoundEvents.RAID_HORN.get(), SoundSource.HOSTILE, 2.5f, 0.6f);
             PrankManager.getInstance().broadcastMessage("§4§l[!] ПОЕЗД-ПАУК ЧАРЛЬЗ несется на вас под гудок паровоза (20 сек)!");
 
-            for (int tick = 1; tick <= 400; tick++) {
+            for (int tick = 1; tick <= 400; tick++) { final int currentTick = tick;
                 final int t = tick;
-                PrankManager.getInstance().scheduleTask("Charles_Tick_" + tick, tick, () -> {
+                PrankManager.getInstance().scheduleTask("Charles_Tick_" + currentTick, currentTick, () -> {
                     if (spider.isAlive()) {
                         level.sendParticles(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, spider.getX(), spider.getY() + 1.5, spider.getZ(), 6, 0.2, 0.4, 0.2, 0.05);
                         if (t % 20 == 0) {
@@ -337,9 +337,9 @@ public class PranksBatch4 {
 
         PrankManager.getInstance().broadcastMessage("§0§l[!] ГЛАЗА ИЗ ТЕМНОТЫ: Десятки красных зрачков следят за каждым вашим шагом (15 сек)!");
 
-        for (int tick = 1; tick <= 300; tick++) {
+        for (int tick = 1; tick <= 300; tick++) { final int currentTick = tick;
             final int t = tick;
-            PrankManager.getInstance().scheduleTask("Eyes_Tick_" + tick, tick, () -> {
+            PrankManager.getInstance().scheduleTask("Eyes_Tick_" + currentTick, currentTick, () -> {
                 for (ServerPlayer p : players) {
                     if (t % 15 == 0) {
                         ServerLevel level = p.serverLevel();
@@ -376,8 +376,8 @@ public class PranksBatch4 {
 
         PrankManager.getInstance().broadcastMessage("§7§l[!] MANDELA CATALOGUE: Не смотрите на него... Он подчиняет вашу волю!");
 
-        for (int tick = 1; tick <= 300; tick++) {
-            PrankManager.getInstance().scheduleTask("Alternate_Tick_" + tick, tick, () -> {
+        for (int tick = 1; tick <= 300; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("Alternate_Tick_" + currentTick, currentTick, () -> {
                 if (alternate.isAlive() && target.isAlive()) {
                     // Тянет идти к Альтернату
                     Vec3 pull = alternate.position().subtract(target.position()).normalize().scale(0.22);
@@ -420,8 +420,8 @@ public class PranksBatch4 {
             a.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 400, 2, false, false, false));
         }
 
-        for (int tick = 1; tick <= 400; tick++) {
-            PrankManager.getInstance().scheduleTask("Livestock_Tick_" + tick, tick, () -> {
+        for (int tick = 1; tick <= 400; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("Livestock_Tick_" + currentTick, currentTick, () -> {
                 for (Animal a : animals) {
                     if (a.isAlive()) {
                         ServerPlayer nearest = (ServerPlayer) level.getNearestPlayer(a, 20.0);
@@ -476,8 +476,8 @@ public class PranksBatch4 {
 
         PrankManager.getInstance().broadcastMessage("§a[!] Вдалеке стоит ваш друг и дружелюбно машет рукой...");
 
-        for (int tick = 1; tick <= 300; tick++) {
-            PrankManager.getInstance().scheduleTask("Skinwalker_Tick_" + tick, tick, () -> {
+        for (int tick = 1; tick <= 300; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("Skinwalker_Tick_" + currentTick, currentTick, () -> {
                 if (skinwalker.isAlive()) {
                     if (skinwalker.distanceTo(target) < 4.5) {
                         level.playSound(null, skinwalker.getX(), skinwalker.getY(), skinwalker.getZ(), SoundEvents.WARDEN_ROAR, SoundSource.HOSTILE, 2.5f, 1.4f);
@@ -539,8 +539,8 @@ public class PranksBatch4 {
 
         PrankManager.getInstance().broadcastMessage("§5§l[!] МАРИОНЕТКА: §d" + master.getScoreboardName() + " дергает за нити §f" + puppet.getScoreboardName() + " (20 сек)!");
 
-        for (int tick = 1; tick <= 400; tick++) {
-            PrankManager.getInstance().scheduleTask("Puppet_Tick_" + tick, tick, () -> {
+        for (int tick = 1; tick <= 400; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("Puppet_Tick_" + currentTick, currentTick, () -> {
                 if (master.isAlive() && puppet.isAlive()) {
                     Vec3 targetWalk = master.getLookAngle().scale(0.4);
                     puppet.setDeltaMovement(targetWalk.x, puppet.getDeltaMovement().y, targetWalk.z);
@@ -587,8 +587,8 @@ public class PranksBatch4 {
 
         PrankManager.getInstance().broadcastMessage("§7§l[!] НАРУЧНИКИ: §f" + p1.getScoreboardName() + " и §f" + p2.getScoreboardName() + " скованы железной цепью на 25 секунд!");
 
-        for (int tick = 1; tick <= 500; tick++) {
-            PrankManager.getInstance().scheduleTask("Handcuff_Tick_" + tick, tick, () -> {
+        for (int tick = 1; tick <= 500; tick++) { final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("Handcuff_Tick_" + currentTick, currentTick, () -> {
                 if (p1.isAlive() && p2.isAlive()) {
                     double dist = p1.distanceTo(p2);
                     if (dist > 2.2) {
