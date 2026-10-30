@@ -17,43 +17,43 @@ public class ClientPrankPacket {
     public final String message;
 
     public ClientPrankPacket(ActionType action, int prankId, int duration, int entityId1, int entityId2, float scale, float value, String message) {
-        this.action = action;
-        this.prankId = prankId;
-        this.duration = duration;
-        this.entityId1 = entityId1;
-        this.entityId2 = entityId2;
-        this.scale = scale;
-        this.value = value;
-        this.message = message;
+        action = action;
+        prankId = prankId;
+        duration = duration;
+        entityId1 = entityId1;
+        entityId2 = entityId2;
+        scale = scale;
+        value = value;
+        message = message;
     }
 
     public ClientPrankPacket(FriendlyByteBuf buffer) {
-        this.action = buffer.readEnum(ActionType.class);
-        this.prankId = buffer.readInt();
-        this.duration = buffer.readInt();
-        this.entityId1 = buffer.readInt();
-        this.entityId2 = buffer.readInt();
-        this.scale = buffer.readFloat();
-        this.value = buffer.readFloat();
-        this.message = buffer.readUtf();
+        action = buffer.readEnum(ActionType.class);
+        prankId = buffer.readInt();
+        duration = buffer.readInt();
+        entityId1 = buffer.readInt();
+        entityId2 = buffer.readInt();
+        scale = buffer.readFloat();
+        value = buffer.readFloat();
+        message = buffer.readUtf();
     }
 
     public void toBytes(FriendlyByteBuf buffer) {
-        buffer.writeEnum(this.action);
-        buffer.writeInt(this.prankId);
-        buffer.writeInt(this.duration);
-        buffer.writeInt(this.entityId1);
-        buffer.writeInt(this.entityId2);
-        buffer.writeFloat(this.scale);
-        buffer.writeFloat(this.value);
-        buffer.writeUtf(this.message);
+        buffer.writeEnum(action);
+        buffer.writeInt(prankId);
+        buffer.writeInt(duration);
+        buffer.writeInt(entityId1);
+        buffer.writeInt(entityId2);
+        buffer.writeFloat(scale);
+        buffer.writeFloat(value);
+        buffer.writeUtf(message);
     }
 
     // Добавленные методы, которые искала нейросеть:
-    public ActionType getAction() { return this.action; }
-    public int getPrankId() { return this.prankId; }
-    public int getDurationTicks() { return this.duration; }
-    public float getFloatParam1() { return this.scale; }
+    public ActionType getAction() { return action; }
+    public int getPrankId() { return prankId; }
+    public int getDurationTicks() { return duration; }
+    public float getFloatParam1() { return scale; }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {

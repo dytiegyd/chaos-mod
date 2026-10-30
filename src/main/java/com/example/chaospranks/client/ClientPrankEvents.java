@@ -28,27 +28,27 @@ public class ClientPrankEvents {
     private static int prankRemainingTicks = 0;
 
     // Камера и угол поворота (Пранк 32)
-    private boolean cameraInverted = false;
+    private static boolean cameraInverted = false;
     private float cameraRollAngle = 0.0f;
 
     // Пульсирующий FOV (Пранк 35)
-    private boolean drunkenFov = false;
-    private float fovWaveTime = 0.0f;
+    private static boolean drunkenFov = false;
+    private static float fovWaveTime = 0.0f;
 
     // Масштабирование голов и тел (Пранк 33, 34)
-    private boolean bigHeadMode = false;
+    private static boolean bigHeadMode = false;
     private static float playerScaleMultiplier = 1.0f;
 
     // Инверсия управления и перехват инпута (Пранк 7, 40)
-    private boolean controlsInverted = false;
-    private boolean hijackedByFlea = false;
+    private static boolean controlsInverted = false;
+    private static boolean hijackedByFlea = false;
 
     // Клиентские оверлеи (Кинополосы 21:9, Скримеры, Каптча, Звонок Дискорд)
-    private boolean blockbusterBars = false;
+    private static boolean blockbusterBars = false;
     private static boolean screamerActive = false;
     private static int screamerTicks = 0;
-    private boolean captchaActive = false;
-    private boolean discordCallActive = false;
+    private static boolean captchaActive = false;
+    private static boolean discordCallActive = false;
 
     private ClientPrankEvents() {}
 
@@ -82,44 +82,44 @@ public class ClientPrankEvents {
         int id = packet.getPrankId();
 
         if (id == 7) {
-            this.controlsInverted = true;
+            controlsInverted = true;
         } else if (id == 32) {
-            this.cameraInverted = true;
+            cameraInverted = true;
         } else if (id == 33) {
             playerScaleMultiplier = packet.getFloatParam1() > 0 ? packet.getFloatParam1() : 0.2f;
         } else if (id == 34) {
-            this.bigHeadMode = true;
+            bigHeadMode = true;
         } else if (id == 35) {
-            this.drunkenFov = true;
-            this.fovWaveTime = 0.0f;
+            drunkenFov = true;
+            fovWaveTime = 0.0f;
         } else if (id == 37) {
-            this.blockbusterBars = true;
+            blockbusterBars = true;
         } else if (id == 40) {
-            this.hijackedByFlea = true;
+            hijackedByFlea = true;
         } else if (id == 63) {
             screamerActive = true;
             screamerTicks = 40;
         } else if (id == 86) {
-            this.captchaActive = true;
+            captchaActive = true;
         } else if (id == 87) {
-            this.discordCallActive = true;
+            discordCallActive = true;
         }
     }
 
     public static void resetAllClientEffects() {
         activePrankId = 0;
         prankRemainingTicks = 0;
-        this.cameraInverted = false;
-        this.cameraRollAngle = 0.0f;
-        this.drunkenFov = false;
-        this.bigHeadMode = false;
+        cameraInverted = false;
+        cameraRollAngle = 0.0f;
+        drunkenFov = false;
+        bigHeadMode = false;
         playerScaleMultiplier = 1.0f;
-        this.controlsInverted = false;
-        this.hijackedByFlea = false;
-        this.blockbusterBars = false;
+        controlsInverted = false;
+        hijackedByFlea = false;
+        blockbusterBars = false;
         screamerActive = false;
-        this.captchaActive = false;
-        this.discordCallActive = false;
+        captchaActive = false;
+        discordCallActive = false;
     }
 
     @SubscribeEvent

@@ -47,9 +47,9 @@ public class PrankManager {
         private final String taskName;
 
         public ScheduledTask(String taskName, int delayTicks, Runnable task) {
-            this.taskName = taskName;
-            this.ticksRemaining = delayTicks;
-            this.task = task;
+            taskName = taskName;
+            ticksRemaining = delayTicks;
+            task = task;
         }
 
         public boolean tick() {
@@ -69,12 +69,12 @@ public class PrankManager {
     private PrankManager() {}
 
     public void setServer(MinecraftServer server) {
-        this.server = server;
+        server = server;
     }
 
     public void tick() {
-        if (this.server == null) {
-            this.server = ServerLifecycleHooks.getCurrentServer();
+        if (server == null) {
+            server = ServerLifecycleHooks.getCurrentServer();
         }
 
         // 1. Обновление очереди задач отката
@@ -220,13 +220,13 @@ public class PrankManager {
                 .requires(source -> source.hasPermission(2))
                 .then(Commands.literal("start")
                         .executes(ctx -> {
-                            this.isPaused = false;
+                            isPaused = false;
                             ctx.getSource().sendSuccess(() -> Component.literal("§a[ChaosPranks] Таймер пранков запущен! Интервал: " + (intervalTicks / 20) + " сек."), true);
                             return 1;
                         }))
                 .then(Commands.literal("pause")
                         .executes(ctx -> {
-                            this.isPaused = true;
+                            isPaused = true;
                             ctx.getSource().sendSuccess(() -> Component.literal("§e[ChaosPranks] Таймер пранков приостановлен."), true);
                             return 1;
                         }))
@@ -234,7 +234,7 @@ public class PrankManager {
                         .then(Commands.argument("id", IntegerArgumentType.integer(1, 100))
                                 .executes(ctx -> {
                                     int id = IntegerArgumentType.getInteger(ctx, "id");
-                                    this.server = ctx.getSource().getServer();
+                                    server = ctx.getSource().getServer();
                                     triggerPrankById(id);
                                     ctx.getSource().sendSuccess(() -> Component.literal("§6[ChaosPranks] Принудительно запущен пранк #" + id), true);
                                     return 1;
@@ -243,8 +243,8 @@ public class PrankManager {
                         .then(Commands.argument("seconds", IntegerArgumentType.integer(5, 7200))
                                 .executes(ctx -> {
                                     int seconds = IntegerArgumentType.getInteger(ctx, "seconds");
-                                    this.intervalTicks = seconds * 20;
-                                    this.currentTimer = this.intervalTicks;
+                                    intervalTicks = seconds * 20;
+                                    currentTimer = intervalTicks;
                                     ctx.getSource().sendSuccess(() -> Component.literal("§a[ChaosPranks] Новый интервал установлен: " + seconds + " секунд."), true);
                                     return 1;
                                 })))
