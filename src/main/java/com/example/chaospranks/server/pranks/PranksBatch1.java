@@ -207,7 +207,8 @@ public class PranksBatch1 {
         PrankManager.getInstance().broadcastMessage("§b[!] ОТТАЛКИВАЮЩИЙ ПОЛЮС: Включена магнитная полярность на 30 секунд!");
 
         for (int tick = 1; tick <= 600; tick++) {
-            PrankManager.getInstance().scheduleTask("Repelling_Tick_" + tick, tick, () -> {
+            final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("Repelling_Tick_" + currentTick, currentTick, () -> {
                 for (int i = 0; i < players.size(); i++) {
                     for (int j = i + 1; j < players.size(); j++) {
                         ServerPlayer p1 = players.get(i);
@@ -222,7 +223,7 @@ public class PranksBatch1 {
                                 p1.hurtMarked = true;
                                 p2.hurtMarked = true;
 
-                                if (tick % 20 == 0) {
+                                if (currentTick % 20 == 0) {
                                     p1.playNotifySound(SoundEvents.CONDUIT_DEACTIVATE, SoundSource.PLAYERS, 0.8f, 1.5f);
                                     p2.playNotifySound(SoundEvents.CONDUIT_DEACTIVATE, SoundSource.PLAYERS, 0.8f, 1.5f);
                                     p1.serverLevel().sendParticles(ParticleTypes.ELECTRIC_SPARK, p1.getX(), p1.getY() + 1.0, p1.getZ(), 8, 0.3, 0.3, 0.3, 0.1);
