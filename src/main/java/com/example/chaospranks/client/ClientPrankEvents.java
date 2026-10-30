@@ -45,8 +45,8 @@ public class ClientPrankEvents {
 
     // Клиентские оверлеи (Кинополосы 21:9, Скримеры, Каптча, Звонок Дискорд)
     private boolean blockbusterBars = false;
-    private boolean screamerActive = false;
-    private int screamerTicks = 0;
+    private static boolean screamerActive = false;
+    private static int screamerTicks = 0;
     private boolean captchaActive = false;
     private boolean discordCallActive = false;
 
@@ -71,14 +71,14 @@ public class ClientPrankEvents {
             }
             case TRIGGER_ONE_SHOT -> {
                 if (packet.getPrankId() == 63) {
-                    this.screamerActive = true;
-                    this.screamerTicks = 40;
+                    screamerActive = true;
+                    screamerTicks = 40;
                 }
             }
         }
     }
 
-    private void activateClientPrank(ClientPrankPacket packet) {
+    private static void activateClientPrank(ClientPrankPacket packet) {
         int id = packet.getPrankId();
 
         if (id == 7) {
@@ -97,8 +97,8 @@ public class ClientPrankEvents {
         } else if (id == 40) {
             this.hijackedByFlea = true;
         } else if (id == 63) {
-            this.screamerActive = true;
-            this.screamerTicks = 40;
+            screamerActive = true;
+            screamerTicks = 40;
         } else if (id == 86) {
             this.captchaActive = true;
         } else if (id == 87) {
@@ -106,7 +106,7 @@ public class ClientPrankEvents {
         }
     }
 
-    public void resetAllClientEffects() {
+    public static void resetAllClientEffects() {
         activePrankId = 0;
         prankRemainingTicks = 0;
         this.cameraInverted = false;
@@ -117,7 +117,7 @@ public class ClientPrankEvents {
         this.controlsInverted = false;
         this.hijackedByFlea = false;
         this.blockbusterBars = false;
-        this.screamerActive = false;
+        screamerActive = false;
         this.captchaActive = false;
         this.discordCallActive = false;
     }
