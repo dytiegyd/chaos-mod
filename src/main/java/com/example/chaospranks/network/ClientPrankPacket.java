@@ -5,7 +5,7 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
 public class ClientPrankPacket {
-    public enum ActionType { START, STOP }
+    public enum ActionType { START, STOP, TRIGGER_ONE_SHOT, ROULETTE_TICK }
 
     public final ActionType action;
     public final int prankId;
@@ -48,6 +48,12 @@ public class ClientPrankPacket {
         buffer.writeFloat(this.value);
         buffer.writeUtf(this.message);
     }
+
+    // Добавленные методы, которые искала нейросеть:
+    public ActionType getAction() { return this.action; }
+    public int getPrankId() { return this.prankId; }
+    public int getDurationTicks() { return this.duration; }
+    public float getFloatParam1() { return this.scale; }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {

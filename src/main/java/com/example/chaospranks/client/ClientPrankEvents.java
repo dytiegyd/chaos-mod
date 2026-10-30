@@ -24,8 +24,8 @@ public class ClientPrankEvents {
         return INSTANCE;
     }
 
-    private int activePrankId = 0;
-    private int prankRemainingTicks = 0;
+    private static int activePrankId = 0;
+    private static int prankRemainingTicks = 0;
 
     // Камера и угол поворота (Пранк 32)
     private boolean cameraInverted = false;
@@ -37,7 +37,7 @@ public class ClientPrankEvents {
 
     // Масштабирование голов и тел (Пранк 33, 34)
     private boolean bigHeadMode = false;
-    private float playerScaleMultiplier = 1.0f;
+    private static float playerScaleMultiplier = 1.0f;
 
     // Инверсия управления и перехват инпута (Пранк 7, 40)
     private boolean controlsInverted = false;
@@ -52,13 +52,13 @@ public class ClientPrankEvents {
 
     private ClientPrankEvents() {}
 
-    public void handlePacket(ClientPrankPacket packet) {
+    public static void handlePacket(ClientPrankPacket packet) {
         Minecraft mc = Minecraft.getInstance();
 
         switch (packet.getAction()) {
             case START -> {
-                this.activePrankId = packet.getPrankId();
-                this.prankRemainingTicks = packet.getDurationTicks();
+                activePrankId = packet.getPrankId();
+                prankRemainingTicks = packet.getDurationTicks();
                 activateClientPrank(packet);
             }
             case STOP -> {
@@ -86,7 +86,7 @@ public class ClientPrankEvents {
         } else if (id == 32) {
             this.cameraInverted = true;
         } else if (id == 33) {
-            this.playerScaleMultiplier = packet.getFloatParam1() > 0 ? packet.getFloatParam1() : 0.2f;
+            playerScaleMultiplier = packet.getFloatParam1() > 0 ? packet.getFloatParam1() : 0.2f;
         } else if (id == 34) {
             this.bigHeadMode = true;
         } else if (id == 35) {
@@ -107,13 +107,13 @@ public class ClientPrankEvents {
     }
 
     public void resetAllClientEffects() {
-        this.activePrankId = 0;
-        this.prankRemainingTicks = 0;
+        activePrankId = 0;
+        prankRemainingTicks = 0;
         this.cameraInverted = false;
         this.cameraRollAngle = 0.0f;
         this.drunkenFov = false;
         this.bigHeadMode = false;
-        this.playerScaleMultiplier = 1.0f;
+        playerScaleMultiplier = 1.0f;
         this.controlsInverted = false;
         this.hijackedByFlea = false;
         this.blockbusterBars = false;
