@@ -154,7 +154,7 @@ public class PranksBatch2 {
         PrankManager.getInstance().scheduleTask("PhantomNightmare_Cleanup", 300, () -> {
             for (Phantom p : phantoms) {
                 if (p.isAlive()) {
-                    p.level().sendParticles(ParticleTypes.LARGE_SMOKE, p.getX(), p.getY() + 0.5, p.getZ(), 15, 0.5, 0.5, 0.5, 0.05);
+                    ((net.minecraft.server.level.ServerLevel)p.level()).sendParticles(ParticleTypes.LARGE_SMOKE, p.getX(), p.getY() + 0.5, p.getZ(), 15, 0.5, 0.5, 0.5, 0.05);
                     p.discard();
                 }
             }
@@ -318,7 +318,7 @@ public class PranksBatch2 {
         PrankManager.getInstance().scheduleTask("HordeHallucination_Cleanup", 160, () -> {
             for (Creeper c : creepers) {
                 if (c.isAlive() && c.getTags().contains("PhantomCreeper")) {
-                    c.level().sendParticles(ParticleTypes.POOF, c.getX(), c.getY() + 0.5, c.getZ(), 10, 0.3, 0.3, 0.3, 0.05);
+                    ((net.minecraft.server.level.ServerLevel)c.level()).sendParticles(ParticleTypes.POOF, c.getX(), c.getY() + 0.5, c.getZ(), 10, 0.3, 0.3, 0.3, 0.05);
                     c.discard();
                 }
             }

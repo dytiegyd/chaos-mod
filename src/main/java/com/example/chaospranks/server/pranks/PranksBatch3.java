@@ -600,7 +600,7 @@ public class PranksBatch3 {
         for (int tick = 1; tick <= 600; tick++) {
             PrankManager.getInstance().scheduleTask("ClownSteps_Tick_" + tick, tick, () -> {
                 for (ServerPlayer player : players) {
-                    if (player.walkDist - player.prevWalkDist > 0.05) {
+                    if (player.walkDist - player.walkDistO > 0.05) {
                         if (player.tickCount % 5 == 0) {
                             player.serverLevel().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.SLIME_SQUISH_SMALL, SoundSource.PLAYERS, 2.0f, 1.9f);
                         }
@@ -817,7 +817,7 @@ public class PranksBatch3 {
         PrankManager.getInstance().broadcastMessage("§a§l[!] МИТОЗ: На 20 секунд любой ударенный моб делится пополам!");
 
         for (ServerPlayer player : players) {
-            player.playNotifySound(SoundEvents.SLIME_SPLQUISH, SoundSource.PLAYERS, 1.5f, 1.0f);
+            player.playNotifySound(SoundEvents.SLIME_SQUISH, SoundSource.PLAYERS, 1.5f, 1.0f);
         }
     }
 

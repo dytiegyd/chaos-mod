@@ -502,9 +502,9 @@ public class PranksBatch1 {
                         tnt.setDeltaMovement(motion.x * 1.1, 0.75, motion.z * 1.1);
                         tnt.hasImpulse = true;
 
-                        if (tnt.serverLevel() != null) {
-                            tnt.serverLevel().playSound(null, tnt.getX(), tnt.getY(), tnt.getZ(), SoundEvents.SLIME_BLOCK_FALL, SoundSource.BLOCKS, 1.0f, 1.2f);
-                            tnt.serverLevel().sendParticles(ParticleTypes.ITEM_SLIME, tnt.getX(), tnt.getY(), tnt.getZ(), 8, 0.2, 0.1, 0.2, 0.05);
+                        if (((net.minecraft.server.level.ServerLevel)tnt.level()) != null) {
+                            ((net.minecraft.server.level.ServerLevel)tnt.level()).playSound(null, tnt.getX(), tnt.getY(), tnt.getZ(), SoundEvents.SLIME_BLOCK_FALL, SoundSource.BLOCKS, 1.0f, 1.2f);
+                            ((net.minecraft.server.level.ServerLevel)tnt.level()).sendParticles(ParticleTypes.ITEM_SLIME, tnt.getX(), tnt.getY(), tnt.getZ(), 8, 0.2, 0.1, 0.2, 0.05);
                         }
                     }
                 }
@@ -598,7 +598,7 @@ public class PranksBatch1 {
         PrankManager.getInstance().scheduleTask("PiglinSwat_Despawn", 300, () -> {
             for (PiglinBrute brute : spawnedPiglins) {
                 if (brute.isAlive()) {
-                    brute.level().sendParticles(ParticleTypes.LARGE_SMOKE, brute.getX(), brute.getY() + 1.0, brute.getZ(), 10, 0.3, 0.5, 0.3, 0.05);
+                    ((net.minecraft.server.level.ServerLevel)brute.level()).sendParticles(ParticleTypes.LARGE_SMOKE, brute.getX(), brute.getY() + 1.0, brute.getZ(), 10, 0.3, 0.5, 0.3, 0.05);
                     brute.discard();
                 }
             }
@@ -635,7 +635,7 @@ public class PranksBatch1 {
         PrankManager.getInstance().scheduleTask("Ghast_Despawn", 200, () -> {
             for (Ghast ghast : ghasts) {
                 if (ghast.isAlive()) {
-                    ghast.level().sendParticles(ParticleTypes.POOF, ghast.getX(), ghast.getY() + 1.0, ghast.getZ(), 20, 1.0, 1.0, 1.0, 0.1);
+                    ((net.minecraft.server.level.ServerLevel)ghast.level()).sendParticles(ParticleTypes.POOF, ghast.getX(), ghast.getY() + 1.0, ghast.getZ(), 20, 1.0, 1.0, 1.0, 0.1);
                     ghast.discard();
                 }
             }
@@ -672,7 +672,7 @@ public class PranksBatch1 {
         PrankManager.getInstance().scheduleTask("Silverfish_Cleanup", 300, () -> {
             for (Silverfish sf : silverfishes) {
                 if (sf.isAlive()) {
-                    sf.level().sendParticles(ParticleTypes.SMOKE, sf.getX(), sf.getY() + 0.2, sf.getZ(), 3, 0.1, 0.1, 0.1, 0.02);
+                    ((net.minecraft.server.level.ServerLevel)sf.level()).sendParticles(ParticleTypes.SMOKE, sf.getX(), sf.getY() + 0.2, sf.getZ(), 3, 0.1, 0.1, 0.1, 0.02);
                     sf.discard();
                 }
             }
@@ -802,7 +802,7 @@ public class PranksBatch1 {
         PrankManager.getInstance().scheduleTask("MagmaCube_Despawn", 300, () -> {
             for (MagmaCube cube : cubes) {
                 if (cube.isAlive()) {
-                    cube.level().sendParticles(ParticleTypes.FLAME, cube.getX(), cube.getY() + 2.0, cube.getZ(), 30, 2.0, 2.0, 2.0, 0.1);
+                    ((net.minecraft.server.level.ServerLevel)cube.level()).sendParticles(ParticleTypes.FLAME, cube.getX(), cube.getY() + 2.0, cube.getZ(), 30, 2.0, 2.0, 2.0, 0.1);
                     cube.discard();
                 }
             }
