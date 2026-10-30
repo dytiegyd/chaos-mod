@@ -1,83 +1,58 @@
 package com.example.chaospranks.network;
 
-import com.example.chaospranks.client.ClientPrankEvents;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
-
 import java.util.function.Supplier;
 
 public class ClientPrankPacket {
-    public enum ActionType {
-        START,
-        STOP,
-        ROULETTE_TICK,
-        TRIGGER_ONE_SHOT
-    }
+    public enum ActionType { START, STOP }
 
-    private final ActionType action;
-    private final int prankId;
-    private final int durationTicks;
-    private final int primaryPlayerId;
-    private final int secondaryPlayerId;
-    private final float floatParam1;
-    private final float floatParam2;
-    private final String customMessage;
+    public final ActionType action;
+    public final int prankId;
+    public final int duration;
+    public final int entityId1;
+    public final int entityId2;
+    public final float scale;
+    public final float value;
+    public final String message;
 
-    public ClientPrankPacket(ActionType action, int prankId, int durationTicks, 
-                             int primaryPlayerId, int secondaryPlayerId, 
-                             float floatParam1, float floatParam2, String customMessage) {
+    public ClientPrankPacket(ActionType action, int prankId, int duration, int entityId1, int entityId2, float scale, float value, String message) {
         this.action = action;
         this.prankId = prankId;
-        this.durationTicks = durationTicks;
-        this.primaryPlayerId = primaryPlayerId;
-        this.secondaryPlayerId = secondaryPlayerId;
-        this.floatParam1 = floatParam1;
-        this.floatParam2 = floatParam2;
-        this.customMessage = customMessage != null ? customMessage : "";
+        this.duration = duration;
+        this.entityId1 = entityId1;
+        this.entityId2 = entityId2;
+        this.scale = scale;
+        this.value = value;
+        this.message = message;
     }
 
-    public static void encode(ClientPrankPacket msg, FriendlyByteBuf buf) {
-        buf.writeEnum(msg.action);
-        buf.writeVarInt(msg.prankId);
-        buf.writeVarInt(msg.durationTicks);
-        buf.writeVarInt(msg.primaryPlayerId);
-        buf.writeVarInt(msg.secondaryPlayerId);
-        buf.writeFloat(msg.floatParam1);
-        buf.writeFloat(msg.floatParam2);
-        buf.writeUtf(msg.customMessage);
+    public ClientPrankPacket(FriendlyByteBuf buffer) {
+        this.action = buffer.readEnum(ActionType.class);
+        this.prankId = buffer.readInt();
+        this.duration = buffer.readInt();
+        this.entityId1 = buffer.readInt();
+        this.entityId2 = buffer.readInt();
+        this.scale = buffer.readFloat();
+        this.value = buffer.readFloat();
+        this.message = buffer.readUtf();
     }
 
-    public static ClientPrankPacket decode(FriendlyByteBuf buf) {
-        ActionType action = buf.readEnum(ActionType.class);
-        int prankId = buf.readVarInt();
-        int durationTicks = buf.readVarInt();
-        int primaryPlayerId = buf.readVarInt();
-        int secondaryPlayerId = buf.readVarInt();
-        float floatParam1 = buf.readFloat();
-        float floatParam2 = buf.readFloat();
-        String customMessage = buf.readUtf();
-
-        return new ClientPrankPacket(action, prankId, durationTicks, primaryPlayerId, secondaryPlayerId, floatParam1, floatParam2, customMessage);
+    public void toBytes(FriendlyByteBuf buffer) {
+        buffer.writeEnum(this.action);
+        buffer.writeInt(this.prankId);
+        buffer.writeInt(this.duration);
+        buffer.writeInt(this.entityId1);
+        buffer.writeInt(this.entityId2);
+        buffer.writeFloat(this.scale);
+        buffer.writeFloat(this.value);
+        buffer.writeUtf(this.message);
     }
 
-    public static void handle(ClientPrankPacket msg, Supplier<NetworkEvent.Context> ctxSupplier) {
-        NetworkEvent.Context ctx = ctxSupplier.get();
-        ctx.enqueueWork(() -> {
-            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-                ClientPrankEvents.getInstance().handlePacket(msg);
-            });
+    public void handle(Supplier<NetworkEvent.Context> ctx) {
+        ctx.get().enqueueWork(() -> {
+            com.example.chaospranks.client.ClientPrankEvents.handlePacket(this);
         });
-        ctx.setPacketHandled(true);
+        ctx.get().setPacketHandled(true);
     }
-
-    public ActionType getAction() { return action; }
-    public int getPrankId() { return prankId; }
-    public int getDurationTicks() { return durationTicks; }
-    public int getPrimaryPlayerId() { return primaryPlayerId; }
-    public int getSecondaryPlayerId() { return secondaryPlayerId; }
-    public float getFloatParam1() { return floatParam1; }
-    public float getFloatParam2() { return floatParam2; }
-    public String getCustomMessage() { return customMessage; }
 }
