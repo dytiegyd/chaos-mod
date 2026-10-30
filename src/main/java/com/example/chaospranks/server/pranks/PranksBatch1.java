@@ -206,7 +206,7 @@ public class PranksBatch1 {
     public static void executePrank5_RepellingPoles(List<ServerPlayer> players) {
         PrankManager.getInstance().broadcastMessage("§b[!] ОТТАЛКИВАЮЩИЙ ПОЛЮС: Включена магнитная полярность на 30 секунд!");
 
-        for (int tick = 1; tick <= 600; tick++) { final int currentTick = tick;
+        for (int tick = 1; tick <= 600; tick++) { 
             final int currentTick = tick;
             PrankManager.getInstance().scheduleTask("Repelling_Tick_" + currentTick, currentTick, () -> {
                 for (int i = 0; i < players.size(); i++) {
@@ -223,7 +223,7 @@ public class PranksBatch1 {
                                 p1.hurtMarked = true;
                                 p2.hurtMarked = true;
 
-                                if (currentcurrentTick % 20 == 0) {
+                                if (currentTick % 20 == 0) {
                                     p1.playNotifySound(SoundEvents.CONDUIT_DEACTIVATE, SoundSource.PLAYERS, 0.8f, 1.5f);
                                     p2.playNotifySound(SoundEvents.CONDUIT_DEACTIVATE, SoundSource.PLAYERS, 0.8f, 1.5f);
                                     p1.serverLevel().sendParticles(ParticleTypes.ELECTRIC_SPARK, p1.getX(), p1.getY() + 1.0, p1.getZ(), 8, 0.3, 0.3, 0.3, 0.1);
@@ -320,7 +320,7 @@ public class PranksBatch1 {
     public static void executePrank9_Tornado(List<ServerPlayer> players) {
         PrankManager.getInstance().broadcastMessage("§f§l[!] ТОРНАДО! Мощный вихрь закручивает всех в небо на 12 секунд!");
 
-        for (int tick = 1; tick <= 240; tick++) { final int currentTick = tick;
+        for (int tick = 1; tick <= 240; tick++) { 
             final int currentTick = tick;
             PrankManager.getInstance().scheduleTask("Tornado_Tick_" + currentTick, currentTick, () -> {
                 for (ServerPlayer player : players) {
@@ -335,7 +335,7 @@ public class PranksBatch1 {
                         player.hurtMarked = true;
 
                         ServerLevel level = player.serverLevel();
-                        level.sendParticles(ParticleTypes.CLOUD, player.getX() + cos, player.getY() + (currentcurrentTick % 20) * 0.1, player.getZ() + sin, 4, 0.1, 0.1, 0.1, 0.05);
+                        level.sendParticles(ParticleTypes.CLOUD, player.getX() + cos, player.getY() + (currentTick % 20) * 0.1, player.getZ() + sin, 4, 0.1, 0.1, 0.1, 0.05);
 
                         // Разбрасываем сущностей вокруг
                         List<Entity> nearby = level.getEntities(player, player.getBoundingBox().inflate(6.0));
