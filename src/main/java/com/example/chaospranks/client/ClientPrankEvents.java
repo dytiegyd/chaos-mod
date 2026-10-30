@@ -29,7 +29,7 @@ public class ClientPrankEvents {
 
     // Камера и угол поворота (Пранк 32)
     private static boolean cameraInverted = false;
-    private float cameraRollAngle = 0.0f;
+    private static float cameraRollAngle = 0.0f;
 
     // Пульсирующий FOV (Пранк 35)
     private static boolean drunkenFov = false;
