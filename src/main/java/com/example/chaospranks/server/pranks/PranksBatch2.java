@@ -337,12 +337,13 @@ public class PranksBatch2 {
         PrankManager.getInstance().broadcastMessage("§0§l[!] ЧЕРНАЯ ДЫРА: Гравитационная аномалия затягивает всё вокруг (6 сек)!");
 
         for (int tick = 1; tick <= 120; tick++) {
-            PrankManager.getInstance().scheduleTask("BlackHole_Tick_" + tick, tick, () -> {
+            final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("BlackHole_Tick_" + currentTick, currentTick, () -> {
                 // Визуальная сфера черной дыры
                 level.sendParticles(ParticleTypes.SQUID_INK, singularity.x, singularity.y, singularity.z, 25, 0.5, 0.5, 0.5, 0.05);
                 level.sendParticles(ParticleTypes.PORTAL, singularity.x, singularity.y, singularity.z, 30, 2.0, 2.0, 2.0, 0.1);
 
-                if (tick % 25 == 0) {
+               if (currentTick % 25 == 0) {
                     level.playSound(null, singularity.x, singularity.y, singularity.z, SoundEvents.BEACON_DEACTIVATE, SoundSource.BLOCKS, 2.0f, 0.5f);
                 }
 
@@ -443,7 +444,8 @@ public class PranksBatch2 {
 
         // Имитация звука вертолетных лопастей
         for (int tick = 1; tick <= 200; tick++) {
-            PrankManager.getInstance().scheduleTask("HeliSound_Tick_" + tick, tick, () -> {
+            final int currentTick = tick;
+            PrankManager.getInstance().scheduleTask("HeliSound_Tick_" + currentTick, currentTick, () -> {
                 if (wither.isAlive() && tick % 8 == 0) {
                     level.playSound(null, wither.getX(), wither.getY(), wither.getZ(), SoundEvents.MINECART_RIDING, SoundSource.HOSTILE, 2.5f, 1.8f);
                     level.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, wither.getX(), wither.getY() + 1.0, wither.getZ(), 8, 0.4, 0.2, 0.4, 0.05);
