@@ -446,7 +446,7 @@ public class PranksBatch2 {
         for (int tick = 1; tick <= 200; tick++) {
             final int currentTick = tick;
             PrankManager.getInstance().scheduleTask("HeliSound_Tick_" + currentTick, currentTick, () -> {
-                if (wither.isAlive() && tick % 8 == 0) {
+                if (wither.isAlive() && currentTick % 8 == 0) {
                     level.playSound(null, wither.getX(), wither.getY(), wither.getZ(), SoundEvents.MINECART_RIDING, SoundSource.HOSTILE, 2.5f, 1.8f);
                     level.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, wither.getX(), wither.getY() + 1.0, wither.getZ(), 8, 0.4, 0.2, 0.4, 0.05);
                 }
